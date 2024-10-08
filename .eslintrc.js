@@ -32,5 +32,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-var-requires': 'off',
+    'no-case-declarations': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };
