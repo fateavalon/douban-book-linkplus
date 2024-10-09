@@ -1,5 +1,5 @@
 // @ts-nocheck
-import pinyin from 'pinyin';
+import { pinyin } from 'pinyin-pro';
 
 const getURL_GM = (url, headers, data) => {
   return new Promise((resolve) =>
@@ -113,7 +113,7 @@ export const getDoubanBookInfo = async (id) => {
     if (isEmpty(data.alt)) return [];
     // const url = data.alt.replace('/movie/', '/subject/') + '/';
     // return { url, rating: data.rating, title: data.title };
-    return pinyin(data.title, { style: pinyin.STYLE_NORMAL });
+    return pinyin(data.title, { toneType: 'none', type: 'array', nonZh: 'consecutive' });
   }
   return [];
   // Fallback to search.
@@ -139,7 +139,9 @@ export const getDoubanAuthorInfo = async () => {
   const regex = /[a-zA-Z ]+|[^a-zA-Z]+/g;
 
   // Use the match function to find all matches based on the regular expression
-  return text.match(regex).map((t) => pinyin(t.trim(), { style: pinyin.STYLE_NORMAL })) ?? [];
+  return (
+    text.match(regex).map((t) => pinyin(t.trim(), { toneType: 'none', type: 'array', nonZh: 'consecutive' })) ?? []
+  );
 };
 
 export const insertDiv = (list) => {
