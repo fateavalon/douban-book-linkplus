@@ -1128,11 +1128,6 @@
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.2.tgz"
   integrity sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==
 
-"@types/pinyin@^2.10.2":
-  version "2.10.2"
-  resolved "https://registry.npmjs.org/@types/pinyin/-/pinyin-2.10.2.tgz"
-  integrity sha512-jLzlRkaLRLg+lgYPjOuP3HX2cozUkhXls5GTXopsKuKJ9lDGlIAb88OoIztH6TbNUsoJnl/7e/kjaumA5IKKJg==
-
 "@types/qs@*":
   version "6.9.7"
   resolved "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
@@ -1817,13 +1812,6 @@ commander@^8.3.0:
   version "8.3.0"
   resolved "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
-
-commander@~1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/commander/-/commander-1.1.1.tgz"
-  integrity sha512-71Rod2AhcH3JhkBikVpNd0pA+fWsmAaVoti6OR38T76chA7vE3pSerS0Jor4wDw+tOueD2zLVvFOw5H0Rcj7rA==
-  dependencies:
-    keypress "0.1.x"
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2994,11 +2982,6 @@ json5@^2.1.2, json5@^2.2.2:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-keypress@0.1.x:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/keypress/-/keypress-0.1.0.tgz"
-  integrity sha512-x0yf9PL/nx9Nw9oLL8ZVErFAk85/lslwEP7Vz7s5SI1ODXZIgit3C5qyWjw4DxOuO/3Hb4866SQh28a1V1d+WA==
-
 kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz"
@@ -3479,12 +3462,10 @@ pify@^4.0.1:
   resolved "https://registry.npmjs.org/pify/-/pify-4.0.1.tgz"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinyin@^4.0.0-alpha.2:
-  version "4.0.0-alpha.2"
-  resolved "https://registry.npmjs.org/pinyin/-/pinyin-4.0.0-alpha.2.tgz"
-  integrity sha512-SED2wWr1X0QwH6rXIDgg20zS1mAk0AVMO8eM3KomUlOYzC8mNMWZnspZWhhI0M8MBIbF2xwa+5r30jTSjAqNsg==
-  dependencies:
-    commander "~1.1.1"
+pinyin-pro@^3.25.0:
+  version "3.25.0"
+  resolved "https://registry.npmjs.org/pinyin-pro/-/pinyin-pro-3.25.0.tgz"
+  integrity sha512-MpwQPa9Ry+1vVHrsRgfJTvbtoMn0Gk529OZEWqN+O/iiSOqnd2dbKrDMaX87n7YvVPhy2W1/sKakK9zheYNWeg==
 
 pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   version "4.2.0"
