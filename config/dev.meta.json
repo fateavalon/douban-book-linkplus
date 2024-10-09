@@ -1,7 +1,7 @@
 {
-  "name": "斗鱼直播助手-dev",
+  "name": "豆瓣 - Link+-dev",
   "namespace": "https://github.com/Eished/douyu-helper-dev",
-  "match": ["*://*.douyu.com/*", "*://*.localhost/*"],
-  "grant": ["GM_getValue", "GM_setValue", "GM_registerMenuCommand", "GM_addValueChangeListener"],
-  "require": ["file://\\\\wsl$\\Ubuntu-20.04\\home\\eis\\web\\tampermonkey-template\\dist\\douyu.dev.user.js"]
+  "match": ["*://*.douban.com/*", "*://*.localhost/*"],
+  "grant": ["GM_getValue", "GM_setValue", "GM_registerMenuCommand", "GM.xmlHttpRequest", "GM_addValueChangeListener"],
+  "require": ["file:///Users/zhangshaoheng/Github/douban-book-linkplus\\dist\\douban.dev.user.js"]
 }

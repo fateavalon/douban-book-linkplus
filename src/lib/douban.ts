@@ -1,4 +1,5 @@
 // @ts-nocheck
+import pinyin from 'pinyin';
 
 const getURL_GM = (url, headers, data) => {
   return new Promise((resolve) =>
@@ -10,6 +11,29 @@ const getURL_GM = (url, headers, data) => {
       onload: function (response) {
         if (response.status >= 200 && response.status < 400) {
           resolve(response.responseText);
+        } else {
+          console.error(`Error getting ${url}:`, response.status, response.statusText, response.responseText);
+          resolve();
+        }
+      },
+      onerror: function (response) {
+        console.error(`Error during GM.xmlHttpRequest to ${url}:`, response.statusText);
+        resolve();
+      },
+    })
+  );
+};
+
+const getXML_GM = (url, headers, data) => {
+  return new Promise((resolve) =>
+    GM.xmlHttpRequest({
+      method: data ? 'POST' : 'GET',
+      url: url,
+      headers: headers,
+      data: data,
+      onload: function (response) {
+        if (response.status >= 200 && response.status < 400) {
+          resolve(response.responseXML);
         } else {
           console.error(`Error getting ${url}:`, response.status, response.statusText, response.responseText);
           resolve();
@@ -86,11 +110,12 @@ const getDoubanAPI = async (query) => {
 export const getDoubanBookInfo = async (id) => {
   const data = await getDoubanAPI(`book/${id}`);
   if (data) {
-    if (isEmpty(data.alt)) return;
+    if (isEmpty(data.alt)) return [];
     // const url = data.alt.replace('/movie/', '/subject/') + '/';
     // return { url, rating: data.rating, title: data.title };
-    return data;
+    return pinyin(data.title, { style: pinyin.STYLE_NORMAL });
   }
+  return [];
   // Fallback to search.
   // const search = await getJSON_GM(`https://movie.douban.com/j/subject_suggest?q=${id}`);
   // if (search && search.length > 0 && search[0].id) {
@@ -103,6 +128,78 @@ export const getDoubanBookInfo = async (id) => {
   //   };
   // }
 };
+
+export const getDoubanAuthorInfo = async () => {
+  const href = document.querySelector('#info > span:nth-child(1) > a')?.href;
+  // const data = await getDoubanAPI(`book/author/${authorID}`);
+  // console.log(data);
+  const data = await getXML_GM(href);
+  const text = data.title.replace('(豆瓣)', '');
+  // Regular expression to match sequences of English (A-Z, a-z) and Chinese (unicode range)
+  const regex = /[a-zA-Z ]+|[^a-zA-Z]+/g;
+
+  // Use the match function to find all matches based on the regular expression
+  return text.match(regex).map((t) => pinyin(t.trim(), { style: pinyin.STYLE_NORMAL })) ?? [];
+};
+
+export const insertDiv = (list) => {
+  const parent = document.querySelector('.aside');
+  if (parent === null) {
+    return;
+  }
+  // parent.insertAdjacentHTML(
+  //   'beforeend',
+  //   `<div class="rating_logo">${title}</div>
+  //     <div class="rating_self clearfix">
+  //         <strong class="ll rating_num">${rating}</strong>
+  //         <div class="rating_right">
+  //             <div class="ll bigstar${star}"></div>
+  //             <div style="clear: both" class="rating_sum"><a href=${link} target=_blank>${num_raters
+  //     .toString()
+  //     .replace(/,/g, '')}人评价</a></div>
+  //         </div>
+  //     </div>` + histogram_html
+  // );
+  // const item = list.map(({ text, hrefText, url }) => formatItem(text, hrefText, url));
+  const div = `<div class="gray_ad buyinfo" id="buyinfo">
+      <div class="buyinfo-printed" id="buyinfo-printed">
+        <h2>
+          <span>Link Plus搜索</span>
+          &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
+        </h2>
+
+        <ul class="bs current-version-list">
+        ${list.map(({ text, hrefText, url }) => formatItem(text, hrefText, url)).join('')}
+        </ul>
+      </div>
+      <div class="add2cartContainer no-border">
+        <span class="add2cartWidget ll">
+          <a href="https://csul.iii.com/" target="_blank" class="j  a_add2cart add2cart" name="4292262">
+            <span>跳转Link Plus</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  `;
+  parent.insertAdjacentHTML('afterbegin', div);
+  return;
+};
+
+const formatItem = (text, hrefText, url) => `
+      <li>
+        <div class="cell price-btn-wrapper">
+          <div class="vendor-name" style="flex:0 0 50%;">
+              <span>${text}</span>
+          </div>
+          <div class="cell impression_track_mod_buyinfo" style="flex:0 0 50%; justify-content: flex-end;">
+            <div class="cell">
+              <a href="${url}" target="_blank" class="buy-book-btn paper-book-btn">
+                <span>${hrefText}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>`;
 
 const isEmpty = (s) => {
   return !s || s === 'N/A';
