@@ -1,0 +1,15 @@
+{
+  "name": "豆瓣 - Link+",
+  "namespace": "https://github.com/fateavalon/douban-book-linkplus",
+  "version": "2024.10.7",
+  "description": "豆瓣链接link plus",
+  "author": "fateacher",
+  "copyright": "fateacher",
+  "license": "MIT",
+  "match": ["*://*.douban.com/*"],
+  "run-at": "document-idle",
+  "supportURL": "https://github.com/fateavalon/douban-book-linkplus",
+  "homepage": "https://github.com/fateavalon/douban-book-linkplus",
+  "grant": ["GM_getValue", "GM_setValue", "GM_registerMenuCommand", "GM.xmlHttpRequest"],
+  "icon": "https://www.google.com/s2/favicons?domain=douban.com"
+}
